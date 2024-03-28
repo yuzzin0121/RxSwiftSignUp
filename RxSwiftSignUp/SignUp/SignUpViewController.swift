@@ -7,12 +7,18 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class SignUpViewController: UIViewController {
-
     let emailTextField = SignTextField(placeholderText: "이메일을 입력해주세요")
     let validationButton = UIButton()
     let nextButton = PointButton(title: "다음")
+    
+    let sampleEmail = BehaviorSubject(value: "a@a.com")
+    // Observable.just("a@a.com")
+    let buttonColor = Observable.just(UIColor.black)
+    let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,8 +28,35 @@ class SignUpViewController: UIViewController {
         configureLayout()
         configure()
         
-        nextButton.addTarget(self, action: #selector(nextButtonClicked), for: .touchUpInside)
+        // 타입이 동일할 때 받아온 값을 바로 보내준다.
+         sampleEmail
+             .bind(to: emailTextField.rx.text)
+             .disposed(by: disposeBag)
 
+         validationButton.rx.tap
+             .bind(with: self) { owner, _ in
+                 // = 로 값을 바꾸지 않는다.
+                 owner.sampleEmail.onNext("b@a.com")
+             }.disposed(by: disposeBag)
+         
+         buttonColor
+             .bind(to: nextButton.rx.backgroundColor,
+                   emailTextField.rx.tintColor,
+                   emailTextField.rx.textColor
+             )
+             .disposed(by: disposeBag)
+         
+         buttonColor
+             .map { $0.cgColor }
+             .bind(to: nextButton.layer.rx.borderColor)
+             .disposed(by: disposeBag)
+         
+ //        nextButton.addTarget(self, action: #selector(nextButtonClicked), for: .touchUpInside)
+         nextButton.rx.tap
+             .bind(with: self) { owner, _ in
+                 owner.navigationController?.pushViewController(PasswordViewController(), animated: true)
+             }
+             .disposed(by: disposeBag)
     }
     
     @objc func nextButtonClicked() {
