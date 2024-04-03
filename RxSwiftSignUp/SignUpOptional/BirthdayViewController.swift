@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 class BirthdayViewController: UIViewController {
     
@@ -66,15 +68,91 @@ class BirthdayViewController: UIViewController {
   
     let nextButton = PointButton(title: "가입하기")
     
+    let infoText = BehaviorSubject(value: "만 17세 이상만 가입 가능합니다.")
+    let today = BehaviorSubject<Date>(value: .now)
+    let year = PublishRelay<Int>()
+    let month = PublishRelay<Int>()
+    let day = PublishRelay<Int>()
+    
+    let disposeBag = DisposeBag()
+    let calendar = Calendar.current
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = Color.white
         
         configureLayout()
-        
+        bind()
         nextButton.addTarget(self, action: #selector(nextButtonClicked), for: .touchUpInside)
     }
+    
+    private func bind() {
+        infoText.bind(to: infoLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        year
+            .asDriver(onErrorJustReturn: 2024)
+            .map { "\($0)년" }
+            .drive(yearLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        month
+            .asDriver(onErrorJustReturn: 4)
+            .map { "\($0)월" }
+            .drive(monthLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        day
+            .asDriver(onErrorJustReturn: 4)
+            .map { "\($0)일" }
+            .drive(dayLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        today
+            .bind(with: self) { owner, date in
+                let component = owner.getComponent(date: date)
+                
+                guard let year = component.year, let month = component.month, let day = component.day else { return }
+                
+                owner.infoLabel.rx.textColor.onNext(.systemRed)
+                owner.nextButton.rx.backgroundColor.onNext(.systemGray6)
+                owner.nextButton.rx.isEnabled.onNext(false)
+            }
+        
+        
+        birthDayPicker.rx.date
+            .subscribe(with: self) { owner, date in
+                let component = owner.getComponent(date: date)
+                let todayComponent = owner.getComponent(date: .now)
+                guard let year = component.year, let month = component.month, let day = component.day, let todayYear = todayComponent.year else { return }
+                
+                owner.year.accept(component.year!)
+                owner.month.accept(component.month!)
+                owner.day.accept(component.day!)
+                
+                let isValid = todayYear - year < 17
+                
+                let infoMessage = isValid ? "만 17세 이상만 가입 가능합니다" : "가입 가능한 나이입니다."
+                let textColor: UIColor = isValid ? .systemRed : .systemBlue
+                let backgroundColor: UIColor = isValid ? .systemGray5 : .systemBlue
+                let isEnabled = isValid ? false : true
+                owner.infoText.onNext(infoMessage)
+                owner.infoLabel.rx.textColor.onNext(textColor)
+                owner.nextButton.rx.backgroundColor.onNext(backgroundColor)
+                owner.nextButton.rx.isEnabled.onNext(isEnabled)
+                
+            }
+            .disposed(by: disposeBag)
+        
+    }
+    
+    func getComponent(date: Date) ->  DateComponents {
+        let component = calendar.dateComponents([.year, .month, .day], from: date)
+        return component
+    }
+    
+    
     
     @objc func nextButtonClicked() {
         print("가입완료")
@@ -114,3 +192,4 @@ class BirthdayViewController: UIViewController {
     }
 
 }
+
