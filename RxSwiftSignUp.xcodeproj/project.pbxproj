@@ -26,6 +26,8 @@
 		615E1F5D2BB57DBB00EDCA93 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615E1F5C2BB57DBB00EDCA93 /* Resource.swift */; };
 		61C667C82BBC6B49007F65E9 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C667C72BBC6B49007F65E9 /* SearchViewController.swift */; };
 		61C667CA2BBC6BA0007F65E9 /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C667C92BBC6BA0007F65E9 /* SearchTableViewCell.swift */; };
+		61C667CD2BBC707F007F65E9 /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C667CC2BBC707F007F65E9 /* SampleViewController.swift */; };
+		61C667CF2BBCDF65007F65E9 /* SampleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61C667CE2BBCDF65007F65E9 /* SampleTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		615E1F5C2BB57DBB00EDCA93 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
 		61C667C72BBC6B49007F65E9 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		61C667C92BBC6BA0007F65E9 /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		61C667CC2BBC707F007F65E9 /* SampleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
+		61C667CE2BBCDF65007F65E9 /* SampleTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +96,7 @@
 		615E1F332BB57C2900EDCA93 /* RxSwiftSignUp */ = {
 			isa = PBXGroup;
 			children = (
+				61C667CB2BBC706E007F65E9 /* Sample */,
 				61C667C62BBC6B3D007F65E9 /* Search */,
 				611722C32BB57E05006A2415 /* SignUpOptional */,
 				615E1F582BB57D8100EDCA93 /* SignUp */,
@@ -149,6 +154,15 @@
 				61C667C92BBC6BA0007F65E9 /* SearchTableViewCell.swift */,
 			);
 			path = Search;
+			sourceTree = "<group>";
+		};
+		61C667CB2BBC706E007F65E9 /* Sample */ = {
+			isa = PBXGroup;
+			children = (
+				61C667CC2BBC707F007F65E9 /* SampleViewController.swift */,
+				61C667CE2BBCDF65007F65E9 /* SampleTableViewCell.swift */,
+			);
+			path = Sample;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -237,6 +251,8 @@
 				611722C92BB57E35006A2415 /* NicknameViewController.swift in Sources */,
 				615E1F352BB57C2900EDCA93 /* AppDelegate.swift in Sources */,
 				611722C52BB57E10006A2415 /* BirthdayViewController.swift in Sources */,
+				61C667CD2BBC707F007F65E9 /* SampleViewController.swift in Sources */,
+				61C667CF2BBCDF65007F65E9 /* SampleTableViewCell.swift in Sources */,
 				61C667C82BBC6B49007F65E9 /* SearchViewController.swift in Sources */,
 				615E1F372BB57C2900EDCA93 /* SceneDelegate.swift in Sources */,
 				61C667CA2BBC6BA0007F65E9 /* SearchTableViewCell.swift in Sources */,
