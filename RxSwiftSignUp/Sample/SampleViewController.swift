@@ -63,6 +63,7 @@ class SampleViewController: UIViewController {
                 var list = owner.items.value
                 list.append(text)
                 owner.items.accept(list)
+                owner.textField.text = ""
             }
             .disposed(by: disposeBag)
         
