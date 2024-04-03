@@ -119,6 +119,7 @@ class BirthdayViewController: UIViewController {
                 owner.nextButton.rx.backgroundColor.onNext(.systemGray6)
                 owner.nextButton.rx.isEnabled.onNext(false)
             }
+            .disposed(by: disposeBag)
         
         
         birthDayPicker.rx.date
