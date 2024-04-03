@@ -13,7 +13,7 @@ import RxCocoa
 class SampleViewController: UIViewController {
     private let tableView: UITableView = {
         let view = UITableView()
-        view.register(SampleTableViewCell.self, forCellReuseIdentifier: SampleTableViewCell.identifier)
+        view.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         view.backgroundColor = .white
         view.rowHeight = 180
         view.separatorStyle = .none
@@ -24,19 +24,21 @@ class SampleViewController: UIViewController {
         let view = UITextField()
         view.backgroundColor = .systemGray6
         view.layer.cornerRadius = 10
+        view.placeholder = "입력하세요"
         return view
     }()
     
     private let addButton: UIButton = {
         let view = UIButton()
         view.backgroundColor = .black
+        view.layer.cornerRadius = 12
         view.setTitleColor(.white, for: .normal)
         view.setTitle("추가", for: .normal)
         return view
     }()
     
-    var data: [String] = []
-    let items = PublishSubject<[String]>()
+    lazy var data: [String] = []
+    let items = BehaviorRelay<[String]>(value: [])
     let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -46,21 +48,24 @@ class SampleViewController: UIViewController {
     }
     
     private func bind() {
-        Observable
-            .zip(addButton.rx.tap, textField.rx.text.orEmpty)
-            .bind(with: self) { owner, value in
-                print("추가")
-                owner.data.append(value.1)
-                owner.items.onNext(owner.data)
-            }
-            .disposed(by: disposeBag)
         
-        
+        // 셀 정의
         items
-            .bind(to: tableView.rx.items(cellIdentifier: SampleTableViewCell.identifier, cellType: SampleTableViewCell.self)) { row, element, cell in
-                cell.nameLabel.text = element
+            .bind(to: tableView.rx.items(cellIdentifier: "Cell", cellType: UITableViewCell.self)) { row, element, cell in
+                cell.textLabel?.text = "\(element)"
             }
             .disposed(by: disposeBag)
+        
+        addButton.rx.tap
+            .bind(with: self) { owner, _ in
+                guard let text = owner.textField.text else { return }
+                var list = owner.items.value
+                list.append(text)
+                owner.items.accept(list)
+            }
+            .disposed(by: disposeBag)
+        
+        
     }
 
     private func configureView() {
