@@ -56,6 +56,7 @@ class SampleViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
+        // 추가 버튼 클릭 시
         addButton.rx.tap
             .bind(with: self) { owner, _ in
                 guard let text = owner.textField.text else { return }
@@ -65,7 +66,14 @@ class SampleViewController: UIViewController {
             }
             .disposed(by: disposeBag)
         
-        
+        // 셀 클릭시 - 삭제
+        tableView.rx.itemSelected
+            .bind(with: self) { owner, indexPath in
+                var list = owner.items.value
+                list.remove(at: indexPath.row)
+                owner.items.accept(list)
+            }
+            .disposed(by: disposeBag)
     }
 
     private func configureView() {
