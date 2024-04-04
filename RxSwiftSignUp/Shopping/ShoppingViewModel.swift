@@ -27,7 +27,7 @@ class ShoppingViewModel {
         inputText
             .distinctUntilChanged()
             .subscribe(with: self) { owner, value in
-                print("inputText Sub")
+                print("")
                 let result = value.isEmpty ? "" : value
             }
             .disposed(by: disposeBag)
