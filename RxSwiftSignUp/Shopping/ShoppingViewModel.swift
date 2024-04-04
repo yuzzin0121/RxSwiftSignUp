@@ -27,17 +27,21 @@ class ShoppingViewModel {
         inputText
             .distinctUntilChanged()
             .subscribe(with: self) { owner, value in
+                print("inputText Sub")
                 let result = value.isEmpty ? "" : value
             }
             .disposed(by: disposeBag)
+        
         
         // 추가버튼 클릭 시
         inputAddButtonTap
             .withLatestFrom(inputText)
             .subscribe(with: self) { owner, value in
+                print("inputAddButtonTap Sub")
                 var list =  owner.outputList.value
-                list.append(value)
-                owner.onNext(list)
+                let item = ShoppingItem(itemName: value)
+                list.append(item)
+                owner.outputList.accept(list)
             }
             .disposed(by: disposeBag)
     }
