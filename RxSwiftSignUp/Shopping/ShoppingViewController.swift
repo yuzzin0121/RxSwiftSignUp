@@ -16,6 +16,8 @@ class ShoppingViewController: UIViewController {
     var list = PublishSubject<[ShoppingItem]>()
     let disposeBag = DisposeBag()
     
+    let viewModel = ShoppingViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNavigatoinItem()
@@ -28,17 +30,21 @@ class ShoppingViewController: UIViewController {
             cell.configureCell(item: element)
             cell.checkButton.rx.tap
                 .bind(with: self) { owner, Void in
-                    owner.data[row].isDone.toggle()
-                    owner.list.onNext(owner.data)
+                    owner.viewModel.inputData[row].isDone.toggle()
+                    owner.list.onNext(owner.viewModel.inputData)
                 }
                 .disposed(by: cell.disposeBag)
             
             cell.starButton.rx.tap.bind(with: self) { owner, _ in
-                owner.data[row].favorite.toggle()
-                owner.list.onNext(owner.data)
+                owner.viewModel.inputData[row].favorite.toggle()
+                owner.list.onNext(owner.viewModel.inputData)
             }.disposed(by: cell.disposeBag)
         }
         .disposed(by: disposeBag)
+        
+        mainView.addTextField.rx.text.orEmpty
+            .bind(to: viewModel.inputText)
+            .disposed(by: disposeBag)
         
         // 추가 버튼 클릭 시
         mainView.addButton.rx.tap.bind(with: self) { owner, _ in
@@ -48,6 +54,12 @@ class ShoppingViewController: UIViewController {
             owner.list.onNext(owner.data)
         }
         .disposed(by: disposeBag)
+        
+        mainView.addButton.rx.tap
+            .bind(to: viewModel.inputAddButtonTap)
+            .disposed(by: disposeBag)
+        
+        
         
         // 셀 클릭 시
         Observable.zip(mainView.tableView.rx.itemSelected, mainView.tableView.rx.modelSelected(ShoppingItem.self))

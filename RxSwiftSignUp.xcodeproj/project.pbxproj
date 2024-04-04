@@ -24,6 +24,7 @@
 		615E1F572BB57D3300EDCA93 /* SignTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615E1F562BB57D3300EDCA93 /* SignTextField.swift */; };
 		615E1F5A2BB57D9700EDCA93 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615E1F592BB57D9700EDCA93 /* SignUpViewController.swift */; };
 		615E1F5D2BB57DBB00EDCA93 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 615E1F5C2BB57DBB00EDCA93 /* Resource.swift */; };
+		619F253D2BBE29A90067F534 /* ShoppingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 619F253C2BBE29A90067F534 /* ShoppingViewModel.swift */; };
 		61BF0BE62BBDD9C900C8AB02 /* ShoppingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF0BE52BBDD9C900C8AB02 /* ShoppingViewController.swift */; };
 		61BF0BE82BBDD9F900C8AB02 /* ShoppingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF0BE72BBDD9F900C8AB02 /* ShoppingView.swift */; };
 		61BF0BEA2BBDDB0000C8AB02 /* ShoppingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61BF0BE92BBDDB0000C8AB02 /* ShoppingTableViewCell.swift */; };
@@ -51,6 +52,7 @@
 		615E1F562BB57D3300EDCA93 /* SignTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignTextField.swift; sourceTree = "<group>"; };
 		615E1F592BB57D9700EDCA93 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		615E1F5C2BB57DBB00EDCA93 /* Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resource.swift; sourceTree = "<group>"; };
+		619F253C2BBE29A90067F534 /* ShoppingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingViewModel.swift; sourceTree = "<group>"; };
 		61BF0BE52BBDD9C900C8AB02 /* ShoppingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingViewController.swift; sourceTree = "<group>"; };
 		61BF0BE72BBDD9F900C8AB02 /* ShoppingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingView.swift; sourceTree = "<group>"; };
 		61BF0BE92BBDDB0000C8AB02 /* ShoppingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingTableViewCell.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				61BF0BE72BBDD9F900C8AB02 /* ShoppingView.swift */,
 				61BF0BE92BBDDB0000C8AB02 /* ShoppingTableViewCell.swift */,
 				61BF0BEB2BBDDBF400C8AB02 /* ShoppingItem.swift */,
+				619F253C2BBE29A90067F534 /* ShoppingViewModel.swift */,
 			);
 			path = Shopping;
 			sourceTree = "<group>";
@@ -267,6 +270,7 @@
 			files = (
 				615E1F4A2BB57CCA00EDCA93 /* SignInViewController.swift in Sources */,
 				615E1F5D2BB57DBB00EDCA93 /* Resource.swift in Sources */,
+				619F253D2BBE29A90067F534 /* ShoppingViewModel.swift in Sources */,
 				615E1F5A2BB57D9700EDCA93 /* SignUpViewController.swift in Sources */,
 				611722C92BB57E35006A2415 /* NicknameViewController.swift in Sources */,
 				615E1F352BB57C2900EDCA93 /* AppDelegate.swift in Sources */,
