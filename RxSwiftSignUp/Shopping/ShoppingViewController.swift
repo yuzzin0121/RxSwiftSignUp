@@ -23,6 +23,14 @@ class ShoppingViewController: UIViewController {
         configureNavigatoinItem()
         bind2()
     }
+    
+    private func bind3() {
+        let input = ShoppingViewModel.Input(inputText: mainView.addTextField.rx.text, inputAddButtonTap: mainView.addButton.rx.tap)
+        
+        let output = viewModel.transform(input: input)
+    }
+    
+    
     private func bind2() {
         // 셀 정의
         viewModel.outputList.bind(to: mainView.tableView.rx.items(cellIdentifier: ShoppingTableViewCell.identifier, cellType: ShoppingTableViewCell.self)) { row, element, cell in

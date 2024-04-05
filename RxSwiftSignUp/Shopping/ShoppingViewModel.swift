@@ -18,31 +18,46 @@ class ShoppingViewModel {
     
     let disposeBag = DisposeBag()
     
-    init() {
-        transform()
+    struct Input {
+        let inputText: ControlProperty<String?>
+        let inputAddButtonTap: ControlEvent<Void>
     }
     
-    private func transform() {
-        // 입력된 아이템
-        inputText
-            .distinctUntilChanged()
-            .subscribe(with: self) { owner, value in
-                print("")
-                let result = value.isEmpty ? "" : value
-            }
-            .disposed(by: disposeBag)
-        
-        
-        // 추가버튼 클릭 시
-        inputAddButtonTap
-            .withLatestFrom(inputText)
-            .subscribe(with: self) { owner, value in
-                print("inputAddButtonTap Sub")
-                var list =  owner.outputList.value
-                let item = ShoppingItem(itemName: value)
-                list.append(item)
-                owner.outputList.accept(list)
-            }
-            .disposed(by: disposeBag)
+    struct Output {
+      
     }
+    
+    init() {
+//        transform()
+    }
+    
+    func transform(input: Input) -> Output {
+        
+        return Output()
+    }
+    
+    
+//    private func transform() {
+//        // 입력된 아이템
+//        inputText
+//            .distinctUntilChanged()
+//            .subscribe(with: self) { owner, value in
+//                print("")
+//                let result = value.isEmpty ? "" : value
+//            }
+//            .disposed(by: disposeBag)
+//        
+//        
+//        // 추가버튼 클릭 시
+//        inputAddButtonTap
+//            .withLatestFrom(inputText)
+//            .subscribe(with: self) { owner, value in
+//                print("inputAddButtonTap Sub")
+//                var list =  owner.outputList.value
+//                let item = ShoppingItem(itemName: value)
+//                list.append(item)
+//                owner.outputList.accept(list)
+//            }
+//            .disposed(by: disposeBag)
+//    }
 }
